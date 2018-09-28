@@ -17,10 +17,10 @@
 pragma solidity 0.4.24;
 
 /**
- * @title IAuctionPriceCurve
+ * @title IAuctionLibrary
  * @author Set Protocol
  *
- * The IAuctionPriceCurve interface provides a structured way to interact with any AuctionLibrary
+ * The IAuctionLibrary interface provides a structured way to interact with any AuctionLibrary
  */
 
 interface IAuctionPriceCurve {
@@ -37,6 +37,5 @@ interface IAuctionPriceCurve {
         uint256 _auctionStartPrice,
         uint256 _curveCoefficient
     )
-        external
-        view;
+        external;
 }

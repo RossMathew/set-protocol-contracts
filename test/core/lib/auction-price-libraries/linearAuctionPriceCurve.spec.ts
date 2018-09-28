@@ -10,17 +10,18 @@ import { Blockchain } from '@utils/blockchain';
 import { ERC20Wrapper } from '@utils/erc20Wrapper';
 import { CoreWrapper } from '@utils/coreWrapper';
 import { RebalancingTokenWrapper } from '@utils/RebalancingTokenWrapper';
+
 import { BigNumberSetup } from '@utils/bigNumberSetup';
 import ChaiSetup from '@utils/chaiSetup';
 import { DEFAULT_GAS } from '@utils/constants';
 
 BigNumberSetup.configure();
 ChaiSetup.configure();
-const { SetProtocolTestUtils: SetTestUtils } = setProtocolUtils;
+const { SetProtocolUtils: SetUtils } = setProtocolUtils;
 const { expect } = chai;
 
 
-contract('LinearAuctionPriceCurve', accounts => {
+contract('LinearAuctionLibrary', accounts => {
   const [
     ownerAccount,
   ] = accounts;
@@ -38,15 +39,15 @@ contract('LinearAuctionPriceCurve', accounts => {
   );
 
   beforeEach(async () => {
-    await blockchain.saveSnapshotAsync();
+    blockchain.saveSnapshotAsync();
     auctionCurve = await coreWrapper.deployLinearAuctionPriceCurveAsync();
   });
 
   afterEach(async () => {
-    await blockchain.revertAsync();
+    blockchain.revertAsync();
   });
 
-  describe('#getCurrentPrice', async () => {
+  describe.only('#getCurrentPrice', async () => {
     let subjectAuctionStartTime: BigNumber;
     let subjectAuctionStartPrice: BigNumber;
     let subjectCurveCoefficient: BigNumber;
@@ -55,7 +56,7 @@ contract('LinearAuctionPriceCurve', accounts => {
     beforeEach(async () => {
       subjectAuctionStartPrice = new BigNumber(500);
       subjectCurveCoefficient = new BigNumber (5);
-      subjectAuctionStartTime = SetTestUtils.generateTimestamp(0);
+      subjectAuctionStartTime = SetUtils.generateTimestamp(0);
       subjectCaller = ownerAccount;
     });
 
